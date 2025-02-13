@@ -57,8 +57,12 @@ gem "devise"
 # Devise Views
 gem "devise-bootstrap-views"
 
-# Add API Gem
-gem "iex-ruby-client"
+# Faraday for API response
+gem 'faraday'
+gem "faraday_middleware"
+
+# ENV Variables
+gem 'dotenv-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
