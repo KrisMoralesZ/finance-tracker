@@ -1,0 +1,18 @@
+<div>
+  <table class="table table-striped table-condensted">
+    <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @stocks.each do |stock|%>
+      <tr>
+        <td><%= stock.ticker %></td>
+        <td><%= stock.security %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
