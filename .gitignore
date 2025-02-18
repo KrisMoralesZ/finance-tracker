@@ -36,3 +36,6 @@
 
 #Ignore Jet-Brains IDE
 /.idea
+
+# Ignore ENV variables
+.env
