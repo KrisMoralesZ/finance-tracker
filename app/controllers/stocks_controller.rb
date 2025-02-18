@@ -1,9 +1,10 @@
+require 'json'
 class StocksController < ApplicationController
   before_action :set_stock, only: %i[ show edit update destroy ]
 
   # GET /stocks or /stocks.json
   def index
-    @stocks = Stock.all
+    @stocks = FinazonClient.get_tickers
   end
 
   # GET /stocks/1 or /stocks/1.json

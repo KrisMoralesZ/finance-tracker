@@ -11,9 +11,13 @@ class FinazonClient
     end
 
     if response.success?
-      JSON.parse(response.body)
+      json = JSON.parse(response.body)
+      json['data'].map { |stock| OpenStruct.new(stock) }
     else
-      { error: response.body }
+      file_path = Rails.root.join("db", "mock_data.json")
+      file = File.read(file_path)
+      json = JSON.parse(file)
+      json['data'].map { |stock| OpenStruct.new(stock) }
     end
   rescue Faraday::Error => e
     { error: e.message }
