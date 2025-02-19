@@ -1,7 +1,7 @@
 require 'faraday'
 require 'json'
 require 'dotenv/load'
-class FinazonClient
+  class GetTickersService
   BASE_URL = 'https://api.finazon.io/latest/finazon/us_stocks_essential/tickers'
   API_KEY = ENV['FINAZON_API_KEY']
   def self.get_tickers(page_size = 1000)

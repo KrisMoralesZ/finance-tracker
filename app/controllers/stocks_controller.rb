@@ -4,7 +4,8 @@ class StocksController < ApplicationController
 
   # GET /stocks or /stocks.json
   def index
-    @stocks = FinazonClient.get_tickers
+    @stocks = GetTickersService.get_tickers
+    @stock_prices = GetTickersService.get_tickers(params[:tickers])
   end
 
   # GET /stocks/1 or /stocks/1.json
