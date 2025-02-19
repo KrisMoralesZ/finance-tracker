@@ -1,5 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Stocks</h1>
+<div >
+  <h1>Stocks</h1>
 
-<%= render 'stocks_list' %>
+  <input type="text" id="searchInput" class="form-control mb-3" placeholder="Buscar por ticker..." onkeyup="filterStocks()">
+
+  <%= render 'stocks_list' %>
+</div>
+
+<script>
+  funtion filterStocks(){
+      let input = document.getElmentById('searchInput').value.toLowerCase();
+      let table
+  }
+</script>
