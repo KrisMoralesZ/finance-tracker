@@ -62,7 +62,12 @@ class StocksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stock
-      @stock = Stock.find(params[:id])
+      all_stocks = GetTickersService.get_tickers
+      @stock = all_stocks.find {|stock| stock["ticker"] == params[:id]}
+
+      unless @stock
+        render file: "#{Rails.root}/public/404.html", status: :not_found
+      end
     end
 
     # Only allow a list of trusted parameters through.
