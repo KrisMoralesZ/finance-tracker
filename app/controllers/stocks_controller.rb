@@ -5,7 +5,6 @@ class StocksController < ApplicationController
   # GET /stocks or /stocks.json
   def index
     @stocks = GetTickersService.get_tickers
-    @stock_prices = GetTickersService.get_tickers(params[:tickers])
   end
 
   # GET /stocks/1 or /stocks/1.json
@@ -65,6 +64,10 @@ class StocksController < ApplicationController
       all_stocks = GetTickersService.get_tickers
       @stock = all_stocks.find {|stock| stock["ticker"] == params[:id]}
 
+      if @stock
+        price_response = GetPriceService.get_price(@stock.ticker)
+        @stock_price = price_response["p"] ? price_response["p"] : "Price not found"
+      end
       unless @stock
         render file: "#{Rails.root}/public/404.html", status: :not_found
       end
