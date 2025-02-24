@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<div >
+<div>
   <h1>Stocks</h1>
 
   <input type="text" id="searchInput" class="form-control mb-3" placeholder="Buscar por ticker..." onkeyup="filterStocks()">
@@ -9,8 +9,23 @@
 </div>
 
 <script>
-  funtion filterStocks(){
-      let input = document.getElmentById('searchInput').value.toLowerCase();
-      let table
+  function filterStocks() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let table = document.getElementById('stocksTable');
+    let rows = table.getElementsByTagName('tr');
+
+    for (let i = 0; i < rows.length; i++) {
+      let ticker = rows[i].getElementsByTagName("td")[0];
+
+      if (ticker) {
+        let textValue = ticker.textContent || ticker.innerText;
+
+        if (textValue.toLowerCase().includes(input)) {
+          rows[i].style.display = "";
+        } else {
+          rows[i].style.display = "none";
+        }
+      }
+    }
   }
 </script>
