@@ -6,10 +6,10 @@
       <th>Name</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="stocksTable">
     <% @stocks.each do |stock|%>
       <tr>
-        <td><%= stock.ticker %></td>
+        <td><%= link_to stock.ticker, stock_path(stock.ticker) %></td>
         <td><%= stock.security %></td>
       </tr>
     <% end %>

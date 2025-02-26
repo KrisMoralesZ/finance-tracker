@@ -1,10 +1,5 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @stock %>
-
 <div>
-  <%= link_to "Edit this stock", edit_stock_path(@stock) %> |
-  <%= link_to "Back to stocks", stocks_path %>
+  <h1><%= @stock.security %></h1>
+  <h1><%= @stock_price %></h1>
 
-  <%= button_to "Destroy this stock", @stock, method: :delete %>
 </div>

@@ -4,7 +4,7 @@ class StocksController < ApplicationController
 
   # GET /stocks or /stocks.json
   def index
-    @stocks = FinazonClient.get_tickers
+    @stocks = GetTickersService.get_tickers
   end
 
   # GET /stocks/1 or /stocks/1.json
@@ -61,7 +61,16 @@ class StocksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stock
-      @stock = Stock.find(params[:id])
+      all_stocks = GetTickersService.get_tickers
+      @stock = all_stocks.find {|stock| stock["ticker"] == params[:id]}
+
+      if @stock
+        price_response = GetPriceService.get_price(@stock.ticker)
+        @stock_price = price_response["p"] ? price_response["p"] : "Price not found"
+      end
+      unless @stock
+        render file: "#{Rails.root}/public/404.html", status: :not_found
+      end
     end
 
     # Only allow a list of trusted parameters through.

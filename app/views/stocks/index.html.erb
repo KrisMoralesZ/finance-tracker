@@ -1,5 +1,31 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Stocks</h1>
+<div>
+  <h1>Stocks</h1>
 
-<%= render 'stocks_list' %>
+  <input type="text" id="searchInput" class="form-control mb-3" placeholder="Buscar por ticker..." onkeyup="filterStocks()">
+
+  <%= render 'stocks_list' %>
+</div>
+
+<script>
+  function filterStocks() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let table = document.getElementById('stocksTable');
+    let rows = table.getElementsByTagName('tr');
+
+    for (let i = 0; i < rows.length; i++) {
+      let ticker = rows[i].getElementsByTagName("td")[0];
+
+      if (ticker) {
+        let textValue = ticker.textContent || ticker.innerText;
+
+        if (textValue.toLowerCase().includes(input)) {
+          rows[i].style.display = "";
+        } else {
+          rows[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
