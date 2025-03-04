@@ -2,5 +2,5 @@ import "@hotwired/turbo-rails"
 import "popper"
 import "bootstrap"
 import "stripe"
-
+import "chartkick/chart.js"
 import "controllers"

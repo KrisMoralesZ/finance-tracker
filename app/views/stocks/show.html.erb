@@ -1,5 +1,37 @@
-<div>
+<%#= turbo_frame_tag "stock_data", src: stock_data_stock_path(@stock.ticker) %>
+
+<!--<div>-->
   <h1><%= @stock.security %></h1>
   <h1><%= @stock_price %></h1>
 
-</div>
+
+<!--  <h3>Histórico de Precios</h3>-->
+  <%= line_chart @chart_data, xtitle: "Fecha", ytitle: "Precio de Cierre", library: { scales: { y: { beginAtZero: false } } } %>
+<!--</div>-->
+
+
+<!--<h1><%#= @stock["name"] %> (<%#= @stock["ticker"] %>)</h1>-->
+
+<!-- Cargar información básica del stock -->
+<!--<table class="table">-->
+<!--  <tr>-->
+<!--    <th>Ticker:</th>-->
+<!--    <td><%#= @stock["ticker"] %></td>-->
+<!--  </tr>-->
+<!--  <tr>-->
+<!--    <th>Sector:</th>-->
+<!--    <td><%#= @stock["sector"] %></td>-->
+<!--  </tr>-->
+<!--</table>-->
+
+<!-- Mostrar Precio (Cargado Asíncronamente) -->
+<!--<h2>Precio Actual</h2>-->
+<%#= turbo_frame_tag "stock_price", src: stock_price_stock_path(@stock["ticker"]) %>
+
+<!-- Mostrar Gráfica de Histórico (Cargado Asíncronamente) -->
+<!--<h2>Histórico de Precios</h2>-->
+<%#= turbo_frame_tag "stock_chart", src: stock_chart_stock_path(@stock["ticker"]) %>
+
+<!-- Enlace para volver atrás -->
+<%#= link_to "Volver", stocks_path, class: "btn btn-secondary mt-3" %>
+

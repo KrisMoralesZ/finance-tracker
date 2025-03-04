@@ -58,6 +58,15 @@ class StocksController < ApplicationController
     end
   end
 
+  def stock_data
+    time_series = GetTimeSeriesService.get_time_series(@stock.ticker)
+    @chart_data = time_series.map { |data| [Time.at(data["t"]).to_date, data["c"]]} if time_series
+
+    puts "AQUI ESTAN TUS DATOS" if @chart_data.present?
+
+    render partial: "stocks/stock_data", locals: { stock: stock, stock_price: stock_price, chart_data: chart_data }
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stock
@@ -67,6 +76,8 @@ class StocksController < ApplicationController
       if @stock
         price_response = GetPriceService.get_price(@stock.ticker)
         @stock_price = price_response["p"] ? price_response["p"] : "Price not found"
+
+
       end
       unless @stock
         render file: "#{Rails.root}/public/404.html", status: :not_found

@@ -1,0 +1,13 @@
+<table class="table">
+  <tr>
+    <th>Precio Actual:</th>
+    <td><%= stock_price %></td>
+  </tr>
+</table>
+
+<h3>Histórico de Precios</h3>
+<% if chart_data.present? %>
+  <%= line_chart chart_data, xtitle: "Fecha", ytitle: "Precio de Cierre" %>
+<% else %>
+  <p>No hay datos disponibles para mostrar la gráfica.</p>
+<% end %>
