@@ -1,1 +1,25 @@
 <h1>My Stocks</h1>
+
+
+<div class="row">
+  <div class="col-9">
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Ticker</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @tracked_stocks.each do |stock| %>
+        <tr>
+          <th scope="row"><%= stock.ticker %></th>
+          <td><%= stock.security %></td>
+          <td><%= @stock_price %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
