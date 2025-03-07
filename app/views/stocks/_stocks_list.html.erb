@@ -4,14 +4,18 @@
     <tr>
       <th>Symbol</th>
       <th>Name</th>
+      <th>Add to portfolio</th>
     </tr>
     </thead>
     <tbody id="stocksTable">
     <% @stocks.each do |stock|%>
-      <tr>
-        <td><%= link_to stock.ticker, stock_path(stock.ticker) %></td>
-        <td><%= stock.security %></td>
-      </tr>
+      <% if stock.name != ""%>
+        <tr>
+          <td><%= link_to stock.ticker, stock_path(stock.ticker) %></td>
+          <td><%= stock.name %></td>
+          <td><%= button_to "Add to...", user_stocks_path(stock_id: stock.id), method: :post, class: "btn btn-primary" %></td>
+        </tr>
+      <% end %>
     <% end %>
     </tbody>
   </table>
