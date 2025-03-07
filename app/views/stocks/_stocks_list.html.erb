@@ -13,7 +13,7 @@
         <tr>
           <td><%= link_to stock.ticker, stock_path(stock.ticker) %></td>
           <td><%= stock.name %></td>
-          <td><button><%= link_to "Add to...", user_stocks_path(user: current_user, stock: "AA"), method: :post %></button></td>
+          <td><%= button_to "Add to...", user_stocks_path(stock_id: stock.id), method: :post, class: "btn btn-primary" %></td>
         </tr>
       <% end %>
     <% end %>
