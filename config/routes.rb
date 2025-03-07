@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :user_stocks
-  resources :stocks, param: :id, only: [:index, :show]
+  resources :user_stocks, only: %i[create destroy]
+  resources :stocks, param: :ticker, only: [:index, :show]
   resources :stocks do
     member do
       get "stock_chart"

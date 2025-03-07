@@ -11,13 +11,9 @@ require 'dotenv/load'
     end
 
     if response.success?
-      json = JSON.parse(response.body)
-      json['data'].map { |stock| OpenStruct.new(stock) }
+      JSON.parse(response.body)
     else
-      file_path = Rails.root.join("db", "mock_data.json")
-      file = File.read(file_path)
-      json = JSON.parse(file)
-      json['data'].map { |stock| OpenStruct.new(stock) }
+      { error: "#{response.status}" }
     end
   rescue Faraday::Error => e
     { error: e.message }

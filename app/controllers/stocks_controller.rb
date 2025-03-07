@@ -4,7 +4,7 @@ class StocksController < ApplicationController
 
   # GET /stocks or /stocks.json
   def index
-    @stocks = GetTickersService.get_tickers
+    @stocks = Stock.all
   end
 
   # GET /stocks/1 or /stocks/1.json
@@ -70,8 +70,7 @@ class StocksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stock
-      all_stocks = GetTickersService.get_tickers
-      @stock = all_stocks.find {|stock| stock["ticker"] == params[:id]}
+      @stock = Stock.find_by(ticker: params[:ticker])
 
       if @stock
         price_response = GetPriceService.get_price(@stock.ticker)
