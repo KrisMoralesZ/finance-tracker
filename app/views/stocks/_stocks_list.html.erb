@@ -13,6 +13,7 @@
         <tr>
           <td><%= link_to stock.ticker, stock_path(stock.ticker) %></td>
           <td><%= stock.name %></td>
+          <%# TODO: Add different style and buttons for validations %>
           <td><%= button_to "Add to...", user_stocks_path(stock_id: stock.id), method: :post, class: "btn btn-primary" %></td>
         </tr>
       <% end %>
