@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :user_stocks, only: %i[create destroy]
   resources :stocks, param: :ticker, only: [:index, :show]
+  resources :friendships, only: %i[create]
   resources :stocks do
     member do
       get "stock_chart"
@@ -13,4 +14,8 @@ Rails.application.routes.draw do
   root "welcome#index"
   get "stocks", to: "stocks#index"
   get "my_stocks", to: "users#my_stocks"
+  get "my_friends", to: "users#my_friends"
+  get "users", to: "users#index"
+
+  post "my_friends", to: "friendships#create"
 end

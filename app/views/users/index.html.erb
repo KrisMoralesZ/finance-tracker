@@ -1,0 +1,22 @@
+<h1>Users</h1>
+
+<div>
+  <table class="table table-striped table-contested">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Last Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= button_to "Add to my Friends List", my_friends_path(friend_id: user.id), method: :post, class: "btn btn-primary"%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
