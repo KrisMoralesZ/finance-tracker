@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get "stocks", to: "stocks#index"
   get "my_stocks", to: "users#my_stocks"
   get "my_friends", to: "users#my_friends"
+  get "followers", to: "friendships#followers"
   get "users", to: "users#index"
 
   post "my_friends", to: "friendships#create"

@@ -9,4 +9,8 @@ class FriendshipsController < ApplicationController
 
     redirect_to my_friends_path
   end
+
+  def followers
+    @followers = Friendship.where(friend_id: current_user.id).includes(:user).map(&:user)
+  end
 end
