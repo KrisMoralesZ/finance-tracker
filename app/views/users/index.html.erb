@@ -6,6 +6,7 @@
       <tr>
         <th>Name</th>
         <th>Last Name</th>
+        <th>Profile</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
+        <td><%= link_to "Show Profile", user_path(user), class: "btn btn-secondary" %></td>
         <td>
           <% if  current_user.friend?(user) %>
             <%= button_to "Remove Friends List", friendship_path(user), method: :delete, class: "btn btn-danger"%>
