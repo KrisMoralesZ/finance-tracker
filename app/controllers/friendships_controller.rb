@@ -13,4 +13,13 @@ class FriendshipsController < ApplicationController
   def followers
     @followers = Friendship.where(friend_id: current_user.id).includes(:user).map(&:user)
   end
+
+  def destroy
+    friend = User.find(params[:id])
+
+    current_user.friends.delete(friend)
+    flash[:success] = "Friend removed successfully!"
+
+    redirect_to my_friends_path
+  end
 end

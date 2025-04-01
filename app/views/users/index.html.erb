@@ -14,7 +14,13 @@
       <tr>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
-        <td><%= button_to "Add to my Friends List", my_friends_path(friend_id: user.id), method: :post, class: "btn btn-primary"%></td>
+        <td>
+          <% if  current_user.friend?(user) %>
+            <%= button_to "Remove Friends List", friendship_path(user), method: :delete, class: "btn btn-danger"%>
+          <% else %>
+            <%= button_to "Add to my Friends List", my_friends_path(friend_id: user.id), method: :post, class: "btn btn-primary"%>
+          <% end %>
+        </td>
       </tr>
     <% end %>
     </tbody>

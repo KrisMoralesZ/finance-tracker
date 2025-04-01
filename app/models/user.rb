@@ -21,4 +21,8 @@ class User < ApplicationRecord
   def add_friend(friend)
     friendships.create(friend_id: friend.id)
   end
+
+  def friend?(user)
+    friends.include?(user)
+  end
 end
