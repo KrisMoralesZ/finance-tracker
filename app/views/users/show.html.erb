@@ -1,6 +1,31 @@
 <h1><%= @user.full_name %></h1>
 <p>Email: <%= @user.email %></p>
 
+<% if @tracked_stocks.count > 1 %>
+  <h2>Tracked Stocks</h2>
+  <div class="row">
+    <table class="table table-bordered table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Ticker</th>
+        <th scope="col">Name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @tracked_stocks.each do |stock| %>
+        <tr>
+          <td><%= link_to stock.ticker, stock_path(stock.ticker) %></td>
+          <td><%= stock.name %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>No tracked stocks found</p>
+<% end %>
+
+
 <h2>Friends</h2>
 <ul>
   <% @user.friends.each do |friend| %>
@@ -9,11 +34,11 @@
 </ul>
 
 <div class="d-flex justify-content-between col-4">
-<%= link_to "Back to Users", users_path, class: "btn btn-secondary" %>
+  <%= link_to "Back to Users", users_path, class: "btn btn-secondary" %>
 
-<% if  current_user.friend?(@user) %>
-  <%= button_to "Remove Friends List", friendship_path(@user), method: :delete, class: "btn btn-danger"%>
-<% else %>
-  <%= button_to "Add to my Friends List", my_friends_path(friend_id: @user.id), method: :post, class: "btn btn-primary"%>
-<% end %>
+  <% if  current_user.friend?(@user) %>
+    <%= button_to "Remove Friends List", friendship_path(@user), method: :delete, class: "btn btn-danger"%>
+  <% else %>
+    <%= button_to "Add to my Friends List", my_friends_path(friend_id: @user.id), method: :post, class: "btn btn-primary"%>
+  <% end %>
 </div>
