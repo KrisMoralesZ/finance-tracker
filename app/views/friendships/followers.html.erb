@@ -2,6 +2,6 @@
 
 <ul>
   <% @followers.each do |follower| %>
-    <li><%= follower.full_name %></li>
+    <li><%= link_to follower.full_name, user_path(follower) %></li>
   <% end %>
 </ul>
