@@ -25,4 +25,8 @@ class User < ApplicationRecord
   def friend?(user)
     friends.include?(user)
   end
+
+  def under_stocks_limit?
+    stocks.count < 5
+  end
 end
