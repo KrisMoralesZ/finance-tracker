@@ -1,4 +1,8 @@
+<p style="color: green"><%= notice %></p>
+
 <h1>Users</h1>
+
+<input type="text" id="searchUsersInput" class="form-control mb-3" placeholder="Search Users..." onkeyup="filterUsers()">
 
 <div>
   <table class="table table-striped">
@@ -10,7 +14,7 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="usersTable">
     <% @users.each do |user| %>
       <tr>
         <td><%= user.first_name %></td>
@@ -28,3 +32,25 @@
     </tbody>
   </table>
 </div>
+
+<script>
+  function filterUsers() {
+      let input = document.getElementById('searchUsersInput').value.toLowerCase();
+      let table = document.getElementById('usersTable');
+      let rows = table.getElementsByTagName('tr');
+
+      for (let i = 0; i < rows.length; i++) {
+          let user = rows[i].getElementsByTagName('td')[0];
+
+          if (user) {
+              let textValue = user.textContent || user.innerText;
+
+              if (textValue.toLowerCase().includes(input)) {
+                  rows[i].style.display = "";
+              } else {
+                  rows[i].style.display = "none";
+              }
+          }
+      }
+  }
+</script>
