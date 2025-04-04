@@ -1,4 +1,4 @@
-<h1>Friends</h1>
+<h1>Followed Contacts</h1>
 
 <% if @friends.count > 1  %>
   <table class="table table-bordered table-hover">
@@ -21,4 +21,8 @@
       <% end %>
     </tbody>
   </table>
+<%else %>
+  <p>You don't have followed contacts, you should add someone in your list</p>
 <%   end %>
+
+<%= link_to "Back to Users", users_path, class: "btn btn-secondary" %>

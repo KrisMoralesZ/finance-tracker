@@ -26,7 +26,7 @@
 <% end %>
 
 
-<h2>Friends</h2>
+<h2><%= @user.full_name %> Friends</h2>
 <ul>
   <% @user.friends.each do |friend| %>
     <li><%= link_to friend.full_name, user_path(friend) %></li>
