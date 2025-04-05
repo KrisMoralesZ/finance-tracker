@@ -7,9 +7,16 @@ class StocksController < ApplicationController
     @stocks = Stock.all
   end
 
-  # GET /stocks/1 or /stocks/1.json
   def show
+    @months = ["January", "February", "March", "April"]
+    @sales = [12, 19, 3, 5]
+
+    @ticker = params["ticker"]
+    @stocks_data = GetTimeSeriesService.get_time_series(@ticker)
+    @labels = @stock_data.map { |d| Time.at(d["t"]).strftime("%b %d")}
+    @close_prices = @stocks_data.map { |d| d["c"]}
   end
+
 
   def stock_data
     time_series = GetTimeSeriesService.get_time_series(@stock.ticker)

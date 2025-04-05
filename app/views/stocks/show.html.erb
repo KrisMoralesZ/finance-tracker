@@ -4,6 +4,79 @@
   <h1><%= @stock.name %></h1>
   <h1><%= @stock_price %></h1>
 
+<!-- charts/show.html.erb -->
+<!--<h1>Sales Chart</h1>-->
+<!--<canvas id="myChart" width="400" height="200"></canvas>-->
+
+<!--<canvas id="stockChart" width="600" height="300"></canvas>-->
+
+
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--        const ctx = document.getElementById('myChart').getContext('2d');-->
+
+<!--        const chart = new Chart(ctx, {-->
+<!--            type: 'bar', // or 'line', 'pie', etc.-->
+<!--            data: {-->
+<!--                labels: ['January', 'February', 'March', 'April'],-->
+<!--                datasets: [{-->
+<!--                    label: 'Sales',-->
+<!--                    data: [12, 19, 3, 5],-->
+<!--                    backgroundColor: 'rgba(75, 192, 192, 0.5)',-->
+<!--                    borderColor: 'rgba(75, 192, 192, 1)',-->
+<!--                    borderWidth: 1-->
+<!--                }]-->
+<!--            },-->
+<!--            options: {-->
+<!--                responsive: true,-->
+<!--                scales: {-->
+<!--                    y: {-->
+<!--                        beginAtZero: true-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+
+<!--    const chartLabels = <%#= raw @months.to_json %>;-->
+<!--    const chartData = <%#= raw @sales.to_json %>;-->
+
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--        const ctx = document.getElementById('stockChart').getContext('2d');-->
+
+<!--        const chart = new Chart(ctx, {-->
+<!--            type: 'line',-->
+<!--            data: {-->
+<!--                labels: <%#= raw @labels.to_json %>,-->
+<!--                datasets: [{-->
+<!--                    label: 'Closing Price',-->
+<!--                    data: <%#= raw @close_prices.to_json %>,-->
+<!--                    fill: false,-->
+<!--                    borderColor: 'rgba(75, 192, 192, 1)',-->
+<!--                    backgroundColor: 'rgba(75, 192, 192, 0.2)',-->
+<!--                    tension: 0.3-->
+<!--                }]-->
+<!--            },-->
+<!--            options: {-->
+<!--                responsive: true,-->
+<!--                plugins: {-->
+<!--                    legend: { position: 'top' },-->
+<!--                    title: {-->
+<!--                        display: true,-->
+<!--                        text: '30-Day Closing Price History'-->
+<!--                    }-->
+<!--                },-->
+<!--                scales: {-->
+<!--                    y: {-->
+<!--                        beginAtZero: false-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+
+<!--</script>-->
+
 
 <!--  <h3>Histórico de Precios</h3>-->
   <%= line_chart @chart_data, xtitle: "Fecha", ytitle: "Precio de Cierre", library: { scales: { y: { beginAtZero: false } } } %>
@@ -35,3 +108,49 @@
 <!-- Enlace para volver atrás -->
 <%#= link_to "Volver", stocks_path, class: "btn btn-secondary mt-3" %>
 
+
+
+<h2>Stock Prices for <%= @ticker %></h2>
+
+<% if @error.present? %>
+  <p style="color: red;">Error: <%= @error %></p>
+<% else %>
+  <canvas id="stockChart" width="600" height="300"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const ctx = document.getElementById('stockChart').getContext('2d');
+
+          const chart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                  labels: <%= raw @labels.to_json %>,
+                  datasets: [{
+                      label: 'Closing Price',
+                      data: <%= raw @close_prices.to_json %>,
+                      borderColor: 'rgba(75, 192, 192, 1)',
+                      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                      fill: false,
+                      tension: 0.3
+                  }]
+              },
+              options: {
+                  responsive: true,
+                  plugins: {
+                      title: {
+                          display: true,
+                          text: '30-Day Closing Price'
+                      }
+                  },
+                  scales: {
+                      y: {
+                          beginAtZero: false
+                      }
+                  }
+              }
+          });
+      });
+  </script>
+<% end %>
